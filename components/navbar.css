@@ -1,0 +1,279 @@
+.site-nav {
+  --nav-navy: #1a2744;
+  --nav-cream: #f7f3eb;
+  --nav-gold: #c4a35a;
+  --nav-ink: #0f1729;
+  --nav-muted: #5c6478;
+
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  border-bottom: 1px solid color-mix(in srgb, var(--nav-gold) 26%, transparent);
+  background: color-mix(in srgb, #fffcf7 82%, var(--nav-cream));
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 4px 20px -16px color-mix(in srgb, var(--nav-navy) 18%, transparent);
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.dark .site-nav {
+  --nav-cream: #12151c;
+  --nav-ink: #f2efe8;
+  --nav-muted: #9ca3b0;
+  background: color-mix(in srgb, var(--nav-cream) 92%, transparent);
+}
+
+.site-nav-inner {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+@media (min-width: 640px) {
+  .site-nav-inner {
+    padding: 0 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .site-nav-inner {
+    padding: 0 2rem;
+  }
+}
+
+.site-nav-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 4.25rem;
+  gap: 1rem;
+}
+
+.site-nav-links {
+  display: none;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+@media (min-width: 768px) {
+  .site-nav-links {
+    display: flex;
+  }
+}
+
+.site-nav-link {
+  position: relative;
+  padding: 0.5rem 0.875rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  color: var(--nav-muted);
+  transition: color 0.25s ease;
+}
+
+.site-nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0.875rem;
+  right: 0.875rem;
+  bottom: 0.25rem;
+  height: 2px;
+  background: var(--nav-gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.site-nav-link:hover,
+.site-nav-link.is-active {
+  color: var(--nav-ink);
+}
+
+.site-nav-link:hover::after,
+.site-nav-link.is-active::after {
+  transform: scaleX(1);
+}
+
+.site-nav-actions {
+  display: none;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .site-nav-actions {
+    display: flex;
+  }
+}
+
+.site-nav-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 9999px;
+  color: var(--nav-muted);
+  border: 1px solid color-mix(in srgb, var(--nav-gold) 25%, transparent);
+  background: transparent;
+  transition: color 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+  cursor: pointer;
+}
+
+.site-nav-icon-btn:hover {
+  color: var(--nav-ink);
+  border-color: var(--nav-gold);
+  background: color-mix(in srgb, var(--nav-gold) 10%, transparent);
+}
+
+.site-nav-wallet {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.4rem 0.85rem;
+  border-radius: 9999px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--nav-navy);
+  background: color-mix(in srgb, var(--nav-gold) 14%, transparent);
+  border: 1px solid color-mix(in srgb, var(--nav-gold) 35%, transparent);
+  transition: background 0.25s ease, border-color 0.25s ease;
+}
+
+.dark .site-nav-wallet {
+  color: var(--nav-gold);
+}
+
+.site-nav-wallet:hover {
+  background: color-mix(in srgb, var(--nav-gold) 22%, transparent);
+  border-color: var(--nav-gold);
+}
+
+.site-nav-ghost-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.45rem 0.9rem;
+  border-radius: 9999px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--nav-muted);
+  transition: color 0.25s ease, background 0.25s ease;
+}
+
+.site-nav-ghost-btn:hover {
+  color: var(--nav-ink);
+  background: color-mix(in srgb, var(--nav-gold) 10%, transparent);
+}
+
+.site-nav-btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1.1rem;
+  border-radius: 9999px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--nav-ink);
+  border: 1.5px solid color-mix(in srgb, var(--nav-gold) 45%, transparent);
+  background: transparent;
+  transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+}
+
+.site-nav-btn-outline:hover {
+  background: color-mix(in srgb, var(--nav-gold) 12%, transparent);
+  border-color: var(--nav-gold);
+}
+
+.site-nav-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1.15rem;
+  border-radius: 9999px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--nav-navy);
+  background: var(--nav-gold);
+  border: 1px solid color-mix(in srgb, var(--nav-gold) 70%, var(--nav-navy));
+  transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.site-nav-btn-primary:hover {
+  background: #d4b36a;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px -10px color-mix(in srgb, var(--nav-gold) 55%, transparent);
+}
+
+.site-nav-menu-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  color: var(--nav-ink);
+  border-radius: 0.5rem;
+  border: 1px solid color-mix(in srgb, var(--nav-gold) 25%, transparent);
+  background: transparent;
+  cursor: pointer;
+  transition: background 0.25s ease, border-color 0.25s ease;
+}
+
+.site-nav-menu-btn:hover {
+  background: color-mix(in srgb, var(--nav-gold) 10%, transparent);
+  border-color: var(--nav-gold);
+}
+
+@media (min-width: 768px) {
+  .site-nav-menu-btn {
+    display: none;
+  }
+}
+
+.site-nav-mobile {
+  padding-bottom: 1rem;
+  border-top: 1px solid color-mix(in srgb, var(--nav-gold) 18%, transparent);
+  animation: site-nav-slide 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes site-nav-slide {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.site-nav-mobile-link {
+  display: block;
+  margin: 0.25rem 0;
+  padding: 0.65rem 1rem;
+  border-radius: 0.625rem;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--nav-muted);
+  transition: color 0.2s ease, background 0.2s ease;
+}
+
+.site-nav-mobile-link:hover,
+.site-nav-mobile-link.is-active {
+  color: var(--nav-ink);
+  background: color-mix(in srgb, var(--nav-gold) 12%, transparent);
+}
+
+.site-nav-mobile-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem 0;
+}
+
+.site-nav-brand-subtitle {
+  color: var(--nav-muted);
+}
+
+.dark .site-nav-brand-subtitle {
+  color: color-mix(in srgb, var(--nav-gold) 75%, white);
+}

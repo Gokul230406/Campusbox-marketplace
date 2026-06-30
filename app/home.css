@@ -1,0 +1,322 @@
+/* Campus-Box homepage — classic motion & layout */
+
+.home-page {
+  --home-navy: #1a2744;
+  --home-cream: #f7f3eb;
+  --home-gold: #c4a35a;
+  --home-ink: #0f1729;
+  --home-muted: #5c6478;
+  background: var(--home-cream);
+  color: var(--home-ink);
+  overflow-x: hidden;
+}
+
+.dark .home-page {
+  --home-cream: #12151c;
+  --home-ink: #f2efe8;
+  --home-muted: #9ca3b0;
+}
+
+/* Hero */
+.home-hero {
+  position: relative;
+  min-height: 92vh;
+  display: flex;
+  align-items: center;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% -10%, color-mix(in srgb, var(--home-gold) 14%, transparent), transparent),
+    linear-gradient(165deg, var(--home-cream) 0%, color-mix(in srgb, var(--home-gold) 5%, var(--home-cream)) 100%);
+  border-bottom: 1px solid color-mix(in srgb, var(--home-gold) 18%, transparent);
+}
+
+.home-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(color-mix(in srgb, var(--home-gold) 12%, transparent) 1px, transparent 1px);
+  background-size: 28px 28px;
+  opacity: 0.25;
+  pointer-events: none;
+}
+
+.home-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.45;
+  animation: home-float 14s ease-in-out infinite;
+}
+
+.home-orb--1 {
+  width: 320px;
+  height: 320px;
+  background: color-mix(in srgb, var(--home-gold) 35%, transparent);
+  top: 10%;
+  right: 8%;
+  animation-delay: 0s;
+}
+
+.home-orb--2 {
+  width: 260px;
+  height: 260px;
+  background: color-mix(in srgb, var(--home-gold) 18%, transparent);
+  bottom: 12%;
+  left: 6%;
+  animation-delay: -5s;
+}
+
+@keyframes home-float {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-22px) scale(1.04); }
+}
+
+/* Staggered entrance */
+.home-fade-up {
+  opacity: 0;
+  transform: translateY(28px);
+  animation: home-fade-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.home-fade-up-delay-1 { animation-delay: 0.12s; }
+.home-fade-up-delay-2 { animation-delay: 0.24s; }
+.home-fade-up-delay-3 { animation-delay: 0.36s; }
+.home-fade-up-delay-4 { animation-delay: 0.48s; }
+.home-fade-up-delay-5 { animation-delay: 0.6s; }
+
+@keyframes home-fade-up {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Scroll reveal */
+.home-reveal {
+  opacity: 0;
+  transform: translateY(36px);
+  transition:
+    opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.home-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stats */
+.home-stat {
+  background: color-mix(in srgb, var(--home-cream) 70%, white);
+  border: 1px solid color-mix(in srgb, var(--home-navy) 14%, transparent);
+  border-radius: 1rem;
+  padding: 1.25rem 1.5rem;
+  box-shadow: 0 12px 40px -24px color-mix(in srgb, var(--home-navy) 35%, transparent);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.dark .home-stat {
+  background: color-mix(in srgb, var(--home-cream) 92%, black);
+}
+
+.home-stat:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 48px -20px color-mix(in srgb, var(--home-navy) 28%, transparent);
+}
+
+/* Feature cards */
+.home-feature-card {
+  height: 100%;
+  border-radius: 1rem;
+  border: 1px solid color-mix(in srgb, var(--home-navy) 14%, transparent);
+  padding: 1.75rem;
+  background: linear-gradient(145deg, white, color-mix(in srgb, var(--home-cream) 60%, white));
+  box-shadow: 0 12px 32px -24px color-mix(in srgb, var(--home-navy) 35%, transparent);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dark .home-feature-card {
+  background: linear-gradient(145deg, #1a2233, #121820);
+}
+
+.home-feature-card:hover {
+  border-color: color-mix(in srgb, var(--home-gold) 40%, transparent);
+  box-shadow: 0 16px 36px -20px color-mix(in srgb, var(--home-navy) 28%, transparent);
+}
+
+/* Category tiles */
+.home-category {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+  border: 1px solid color-mix(in srgb, var(--home-navy) 12%, transparent);
+  background: white;
+  padding: 1.5rem;
+  transition:
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.45s ease,
+    border-color 0.45s ease;
+}
+
+.dark .home-category {
+  background: #161d2b;
+}
+
+.home-category::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--home-gold), var(--home-navy));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.home-category:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px -24px color-mix(in srgb, var(--home-navy) 30%, transparent);
+  border-color: color-mix(in srgb, var(--home-gold) 50%, transparent);
+}
+
+.home-category:hover::after {
+  transform: scaleX(1);
+}
+
+/* Product cards */
+.home-product-card {
+  border-radius: 1rem;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--home-navy) 12%, transparent);
+  background: white;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dark .home-product-card {
+  background: #161d2b;
+}
+
+.home-product-card:hover {
+  border-color: color-mix(in srgb, var(--home-gold) 35%, transparent);
+  box-shadow: 0 12px 32px -20px color-mix(in srgb, var(--home-navy) 25%, transparent);
+}
+
+.home-product-image {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--home-cream) 80%, var(--home-navy));
+}
+
+.home-product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.home-product-card:hover .home-product-image img {
+  transform: none;
+}
+
+/* Classic buttons */
+.home-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.75rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  background: #c4a35a;
+  color: #1a2744;
+  border: 1px solid color-mix(in srgb, #c4a35a 70%, #1a2744);
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease,
+    background 0.35s ease;
+}
+
+.home-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px -10px color-mix(in srgb, #c4a35a 55%, transparent);
+  background: #d4b36a;
+}
+
+.home-btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.75rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  background: transparent;
+  color: var(--home-ink);
+  border: 1.5px solid color-mix(in srgb, var(--home-gold) 45%, transparent);
+  transition:
+    transform 0.35s ease,
+    background 0.35s ease,
+    border-color 0.35s ease;
+}
+
+.home-btn-outline:hover {
+  transform: translateY(-2px);
+  background: color-mix(in srgb, var(--home-gold) 12%, transparent);
+  border-color: var(--home-gold);
+}
+
+/* Categories section */
+.home-categories-section {
+  border-top: 1px solid color-mix(in srgb, var(--home-gold) 16%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--home-gold) 16%, transparent);
+  background: color-mix(in srgb, var(--home-gold) 6%, var(--home-cream));
+}
+
+/* CTA band */
+.home-cta {
+  background: linear-gradient(135deg, #1a2744 0%, #141c2e 55%, #101722 100%);
+  color: #f7f3eb;
+  border-radius: 1.5rem;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--home-gold) 22%, transparent);
+}
+
+.home-cta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 85% 20%, color-mix(in srgb, var(--home-gold) 22%, transparent), transparent 50%);
+  pointer-events: none;
+}
+
+/* Section label */
+.home-eyebrow {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--home-gold);
+}
+
+.home-section-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  line-height: 1.15;
+  color: var(--home-ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-fade-up,
+  .home-reveal,
+  .home-orb,
+  .home-category,
+  .home-product-card,
+  .home-stat,
+  .home-feature-card {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
