@@ -5,10 +5,7 @@ const MONGO_URI = "mongodb://localhost:27017/Mini-project"; // Replace "your_dat
 export async function connectDB() {
   if (mongoose.connection.readyState === 0) {
     try {
-      await mongoose.connect(MONGO_URI, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-      });
+      await mongoose.connect(MONGO_URI);
       console.log("Database connected successfully");
     } catch (error) {
       console.error("Database connection error:", error);
