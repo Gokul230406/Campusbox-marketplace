@@ -7,6 +7,8 @@ import {
 } from "@/lib/stats"
 import "./trending.css"
 
+export const dynamic = "force-dynamic"
+
 export default async function Page() {
   const [topSales, trending, hotDeals, featuredProducts] = await Promise.all([
     getTopSalesProducts(12),
