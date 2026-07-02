@@ -24,9 +24,7 @@ export async function GET(request: NextRequest) {
     }
 
     const skip = (page - 1) * limit
-
     const projects = await Project.find(query).sort(sort).skip(skip).limit(limit).lean()
-
     const total = await Project.countDocuments(query)
 
     return NextResponse.json({
@@ -38,8 +36,10 @@ export async function GET(request: NextRequest) {
         pages: Math.ceil(total / limit),
       },
     })
-  } catch (error: any) {
+  } catch (error) {
     console.error("[PROJECTS GET ERROR]", error)
-    return NextResponse.json({ message: error.message || "Failed to fetch projects" }, { status: 500 })
+    const message = error instanceof Error ? error.message : "Failed to fetch projects"
+    return NextResponse.json({ message }, { status: 500 })
   }
 }
+

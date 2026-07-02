@@ -1,9 +1,9 @@
 import { type NextRequest, NextResponse } from "next/server"
+import { cookies } from "next/headers"
 import { connectDB } from "@/lib/mongodb"
+import { verifyToken } from "@/lib/jwt"
 import Project from "@/models/Project"
 import User from "@/models/User"
-import { verifyToken } from "@/lib/jwt"
-import { cookies } from "next/headers"
 
 export async function POST(request: NextRequest) {
   try {
@@ -40,7 +40,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ message: "User not found" }, { status: 404 })
     }
 
-    // TODO: Upload file to storage service
+    // TODO: Upload file(s) to a storage service
     const fileUrl = `/uploads/${Date.now()}-project-file`
 
     const project = new Project({
@@ -67,8 +67,10 @@ export async function POST(request: NextRequest) {
       },
       { status: 201 },
     )
-  } catch (error: any) {
+  } catch (error) {
     console.error("[PROJECT UPLOAD ERROR]", error)
-    return NextResponse.json({ message: error.message || "Upload failed" }, { status: 500 })
+    const message = error instanceof Error ? error.message : "Upload failed"
+    return NextResponse.json({ message }, { status: 500 })
   }
 }
+

@@ -2,11 +2,15 @@ import { type NextRequest, NextResponse } from "next/server"
 import { connectDB } from "@/lib/mongodb"
 import Project from "@/models/Project"
 
-export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> },
+) {
   try {
     await connectDB()
 
-    const project = await Project.findById(params.id).populate(
+    const { id } = await params
+    const project = await Project.findById(id).populate(
       "sellerId",
       "firstName lastName profileImage rating totalReviews isVerifiedSeller",
     )
@@ -16,8 +20,10 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
     }
 
     return NextResponse.json(project, { status: 200 })
-  } catch (error: any) {
+  } catch (error) {
     console.error("[PROJECT GET ERROR]", error)
-    return NextResponse.json({ message: error.message || "Failed to fetch project" }, { status: 500 })
+    const message = error instanceof Error ? error.message : "Failed to fetch project"
+    return NextResponse.json({ message }, { status: 500 })
   }
 }
+
