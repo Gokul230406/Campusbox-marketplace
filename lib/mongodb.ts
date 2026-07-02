@@ -1,15 +1,14 @@
-import mongoose from "mongoose";
+import mongoose from "mongoose"
 
-const MONGO_URI = "mongodb://localhost:27017/Mini-project"; // Replace "your_database_name" with your actual database name
+const MONGODB_URI =
+  process.env.MONGODB_URI ?? "mongodb://localhost:27017/Mini-project"
+
+let connectionPromise: Promise<typeof mongoose> | null = null
 
 export async function connectDB() {
-  if (mongoose.connection.readyState === 0) {
-    try {
-      await mongoose.connect(MONGO_URI);
-      console.log("Database connected successfully");
-    } catch (error) {
-      console.error("Database connection error:", error);
-      throw new Error("Failed to connect to the database");
-    }
+  if (mongoose.connection.readyState === 1) return
+  if (!connectionPromise) {
+    connectionPromise = mongoose.connect(MONGODB_URI)
   }
+  await connectionPromise
 }
